@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nishkarsh FF Gift Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111;color:white;font-family:Arial}
+header{background:#ff6a00;padding:22px;text-align:center}
+h1{margin:0;font-size:25px}
+nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:15px}
+button{background:#ff6a00;color:white;border:0;padding:12px 18px;border-radius:8px;font-weight:bold}
+main{max-width:600px;margin:auto;padding:15px}
+.card{background:#222;border:1px solid #ff6a00;border-radius:12px;padding:20px;margin:15px 0}
+input{width:100%;padding:13px;margin:10px 0;background:#333;color:white;border:1px solid #ff6a00;border-radius:7px}
+h2{color:#ff8b24}
+.small{color:#aaa;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>🔥 NISHKARSH FF GIFT HUB</h1>
+<p>Free Fire Gift Management</p>
+</header>
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('gift')">Gift Shop</button>
+<button onclick="show('history')">History</button>
+</nav>
+<main>
+<section id="home" class="card">
+<h2>Welcome Player!</h2>
+<p>Welcome to Nishkarsh FF Gift Hub.</p>
+<p>अपनी Gift Request यहाँ भेजें।</p>
+</section>
+<section id="gift" class="card" hidden>
+<h2>🎁 Gift Request</h2>
+<input id="uid" placeholder="Enter Player UID">
+<input id="giftname" placeholder="Gift Name">
+<button onclick="sendRequest()">Submit Request</button>
+<p class="small">यह केवल Request Demo है। असली Gift Garena के आधिकारिक सिस्टम से भेजा जाएगा।</p>
+</section>
+<section id="history" class="card" hidden>
+<h2>Gift History</h2>
+<div id="records">अभी कोई Request नहीं है।</div>
+</section>
+</main>
+<script>
+function show(id){
+document.querySelectorAll('main section').forEach(s=>s.hidden=true);
+document.getElementById(id).hidden=false;
+}
+function sendRequest(){
+let uid=document.getElementById('uid').value.trim();
+let gift=document.getElementById('giftname').value.trim();
+if(!uid||!gift){alert('UID और Gift Name भरो');return;}
+let records=JSON.parse(localStorage.getItem('ffrecords')||'[]');
+records.push({uid,gift});
+localStorage.setItem('ffrecords',JSON.stringify(records));
+alert('Gift Request Saved!');
+document.getElementById('uid').value='';
+document.getElementById('giftname').value='';
+}
+</script>
+</body>
+</html>
